@@ -13,31 +13,31 @@ export class AuthUsecase {
   ) {}
 
   async login(data: Partial<User>): Promise<any> {
-    const { payload: user } = await this.repository.listOne({
+    const { data: user } = await this.repository.listOne({
       email: data.email,
     });
-    if (!user.data) {
+    if (!user) {
       throw new CustomError(404, "Usuario no encontrado.");
     }
     const isValidPassword = await UserService.validatePassword(
-      user.data.password,
+      user.password,
       data.password
     );
     if (!isValidPassword) {
       throw new CustomError(403, "Email o contraseña inválida.");
     }
-    const accessToken = await UserService.generateAccessToken(user.data);
-    return { accessToken, refreshToken: user.data.refreshToken };
+    const accessToken = await UserService.generateAccessToken(user);
+    return { accessToken, refreshToken: user.refreshToken };
   }
 
   async getNewAccessToken(data: Partial<User>): Promise<any> {
-    const { payload: user } = await this.repository.listOne({
+    const { data: user } = await this.repository.listOne({
       refreshToken: data.refreshToken,
     });
-    if (!user.data) {
+    if (!user) {
       throw new CustomError(404, "Usuario no encontrado.");
     }
-    const accessToken = await UserService.generateAccessToken(user.data);
-    return { accessToken, refreshToken: user.data.refreshToken };
+    const accessToken = await UserService.generateAccessToken(user);
+    return { accessToken, refreshToken: user.refreshToken };
   }
 }

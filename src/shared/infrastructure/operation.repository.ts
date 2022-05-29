@@ -4,7 +4,6 @@ import { getModelForClass, ReturnModelType } from "@typegoose/typegoose";
 import { FilterQuery, QueryOptions, SaveOptions } from 'mongoose';
 import { ResultPaging } from "../entities/result-paging.entity";
 import { unmanaged, injectable } from "inversify";
-import { OperationService } from "./operation.service";
 import { CustomError } from "../../helper/errors.handler";
 
 @injectable()
@@ -23,15 +22,13 @@ export abstract class OperationRepository<
   }
 
   async insert(entity: Partial<T>, options: SaveOptions = {}): Promise<Result<T>> {
-    const trace = OperationService.getTrace();
     const data: T[] = await this.dataModel.create([entity], options);
-    return { trace, payload: { data: data[0] } };
+    return { data: data[0] };
   }
 
   async insertMany(entities: Partial<T>[], options: SaveOptions = {}): Promise<Result<T[]>> {
-    const trace = OperationService.getTrace();
     const data: T[] = await this.dataModel.create(entities, options);
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async update(filters: FilterQuery<T>, entity: T, options: QueryOptions = {}): Promise<Result<T>> {
@@ -39,12 +36,11 @@ export abstract class OperationRepository<
       new: true,
       ...options
     }
-    const trace = OperationService.getTrace();
     const data: T = await this.dataModel.findOneAndUpdate(filters, entity, newOptions);
     if (!data) {
       throw new CustomError(404, "Not found");
     }
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async updateMany(
@@ -52,21 +48,18 @@ export abstract class OperationRepository<
     entity: Partial<T>,
     options: QueryOptions = {}
   ): Promise<Result<any>> {
-    const trace = OperationService.getTrace();
     const data = await this.dataModel.updateMany(filters, { $set: { entity } }, options);
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async list(filters: FilterQuery<T> = {}): Promise<Result<T[]>> {
-    const trace = OperationService.getTrace();
     const data: T[] = await this.dataModel.find(filters, {});
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async listOne(filters: FilterQuery<T>): Promise<Result<T>> {
-    const trace = OperationService.getTrace();
     const data: T = await this.dataModel.findOne(filters);
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async listByPage(
@@ -75,7 +68,6 @@ export abstract class OperationRepository<
     pageNum: number,
     pageSize: number
   ): Promise<Result<ResultPaging<T>>> {
-    const trace = OperationService.getTrace();
     const data: T[] = await this.dataModel
       .find(filters)
       .sort(order)
@@ -83,8 +75,6 @@ export abstract class OperationRepository<
       .limit(pageSize);
     const totalResults = await this.dataModel.countDocuments(filters);
     return {
-      trace,
-      payload: {
         data: {
           pageNum,
           pageSize,
@@ -92,22 +82,19 @@ export abstract class OperationRepository<
           totalPages: Math.ceil(totalResults / pageSize),
           items: data,
         },
-      },
     };
   }
 
   async remove(filters: FilterQuery<T>, options: QueryOptions = {}): Promise<Result<T>> {
-    const trace = OperationService.getTrace();
     const data: T = await this.dataModel.findOneAndRemove(filters, options);
     if (!data) {
       throw new CustomError(404, "Not found");
     }
-    return { trace, payload: { data } };
+    return { data };
   }
 
   async removeMany(filters: FilterQuery<T>, options?: QueryOptions): Promise<Result<any>> {
-    const trace = OperationService.getTrace();
     const data = await this.dataModel.deleteMany(filters, options);
-    return { trace, payload: { data } }
+    return { data }
   }
 }

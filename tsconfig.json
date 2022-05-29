@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "sourceMap": false,
+        "outDir": "./cache",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "target": "ES2020",
+        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/**/*.ts", "test/**/*.ts"]
+}

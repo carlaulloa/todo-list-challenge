@@ -1,5 +1,5 @@
 {
-  "name": "todo-list-backend",
+  "name": "todo-list-challenge",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carlaulloa/todo-list-backend.git"
+    "url": "git+https://github.com/carlaulloa/todo-list-challenge.git"
   },
   "author": "Carla Contreras",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/carlaulloa/todo-list-backend/issues"
+    "url": "https://github.com/carlaulloa/todo-list-challenge/issues"
   },
-  "homepage": "https://github.com/carlaulloa/todo-list-backend#readme",
+  "homepage": "https://github.com/carlaulloa/todo-list-challenge#readme",
   "dependencies": {
     "@typegoose/typegoose": "^9.7.0",
     "bcryptjs": "^2.4.3",
@@ -45,7 +45,7 @@
     "nodemon": "^2.0.15",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.2.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.4.2"
   }
 }

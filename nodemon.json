@@ -2,7 +2,7 @@
   "restartable": "rs",
   "verbose": true,
   "execMap": {
-    "ts": "ts-node"
+    "ts": "node -r ts-node/register"
   },
   "watch": ["src/"],
   "ext": "ts tsx json",

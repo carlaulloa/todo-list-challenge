@@ -9,7 +9,8 @@
     "build": "tsc && gulp minify",
     "serve": "cross-env NODE_ENV=prod node dist/server.js",
     "dev": "NODE_ENV=develop && nodemon src/server.ts",
-    "dev:win": "set \"NODE_ENV=develop\" && nodemon src/server.ts"
+    "dev:win": "set \"NODE_ENV=develop\" && nodemon src/server.ts",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,21 +26,23 @@
     "@typegoose/typegoose": "^9.7.0",
     "bcryptjs": "^2.4.3",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "inversify": "^6.0.1",
     "joi": "^17.6.0",
     "jwt-simple": "^0.5.6",
     "moment": "^2.29.2",
     "mongoose": "^6.2.7",
-    "uuid": "^8.3.2",
-    "yenv": "^3.0.1"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.6",
     "@types/joi": "^17.2.3",
     "@types/node": "^16.7.10",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "gulp": "^4.0.2",
     "gulp-uglify-es": "^3.0.0",

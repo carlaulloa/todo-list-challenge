@@ -1,6 +1,7 @@
 node_modules
 cache
 dist
+coverage
 docker-compose/*
 !docker-compose/docker-compose.yml
-#env.yaml
+#.env

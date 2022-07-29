@@ -40,8 +40,8 @@ export const schema = {
   },
   LIST_BY_PAGE: {
     query: Joi.object({
-      page: Joi.number().min(1).default(1),
-      size: Joi.number().min(0).default(10),
+      page: Joi.number().min(1).required(),
+      size: Joi.number().min(0).required(),
     }),
   },
 };

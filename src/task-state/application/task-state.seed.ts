@@ -10,7 +10,7 @@ export class TaskStateSeed {
     private readonly taskStateRepository: TaskStateRepository
   ) {}
 
-  async insertAll(): Promise<void> {
+  async insertAll(): Promise<any> {
     const data = [
       {
         name: "Nuevo",
@@ -25,8 +25,11 @@ export class TaskStateSeed {
     }));
     console.log("Removing task-states...");
     await this.taskStateRepository.removeMany({});
-    console.log('Removed task-states')
-    await this.taskStateRepository.insertMany(formattedData);
+    console.log("Removed task-states");
+    const { data: insertedData } = await this.taskStateRepository.insertMany(
+      formattedData
+    );
     console.log("Inserted seeds");
+    return insertedData;
   }
 }

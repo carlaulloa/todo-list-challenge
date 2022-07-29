@@ -1,6 +1,7 @@
 import express from 'express';
 import { ErrorHandler } from './helper/errors.handler';
-import { route as routeAuth } from './auth/adapter/auth.route';
+import { route as taskRoutes } from './task/adapter/task.route';
+import { route as taskStateRoutes } from './task-state/adapter/task-state.route';
 
 const app = express();
 
@@ -9,7 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-app.use('/auth', routeAuth);
+app.use('/v1/tasks', taskRoutes)
+app.use('/v1/task-states', taskStateRoutes)
 
 app.use(ErrorHandler.handlePathNotFound);
 app.use(ErrorHandler.handleGenericErrors);

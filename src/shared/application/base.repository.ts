@@ -28,4 +28,5 @@ export interface RepositoryBase<T> {
     filters: FilterQuery<T>,
     options?: QueryOptions
   ): Promise<Result<any>>;
+  count(filters: FilterQuery<T>): Promise<number>;
 }

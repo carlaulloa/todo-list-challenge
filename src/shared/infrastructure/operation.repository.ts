@@ -97,4 +97,9 @@ export abstract class OperationRepository<
     const data = await this.dataModel.deleteMany(filters, options);
     return { data }
   }
+
+  async count(filters: FilterQuery<T>): Promise<number> {
+    const totalResults = await this.dataModel.countDocuments(filters);
+    return totalResults;
+  }
 }

@@ -3,4 +3,4 @@ cache
 dist
 docker-compose/*
 !docker-compose/docker-compose.yml
-env.yaml
+#env.yaml

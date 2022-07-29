@@ -25,12 +25,17 @@ export class TaskController {
   async remove(req: Request, res: Response): Promise<void> {
     const { taskId } = req.params;
     await this.taskUsecase.remove(taskId)
-    res.status(204)
+    res.status(204).send()
   }
 
-  async list(req: Request, res: Response): Promise<void> {
+  async listByPage(req: Request, res: Response): Promise<void> {
     const { page, size } = req.query;
     const tasks = await this.taskUsecase.listByPage(+page, +size);
+    res.json(tasks);
+  }
+
+  async listAll(req: Request, res: Response): Promise<void> {
+    const tasks = await this.taskUsecase.listAll();
     res.json(tasks);
   }
 }

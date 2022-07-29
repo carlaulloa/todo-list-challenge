@@ -20,10 +20,10 @@ export class Validators {
       Promise.all(validationList).then((results) => {
         results.forEach(result => {
           if (result.hasOwnProperty('error')) {
-            const error: IError = new Error("Error in parameters");
+            const error: IError = new Error("Error de validación");
             error.status = 400;
             error.name = 'Parameters error';
-            error.message = "Error in parameters";
+            error.message = "Error de validación";
             error.stack = result.error;
             return next(error);
           }

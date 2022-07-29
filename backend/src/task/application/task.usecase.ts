@@ -65,4 +65,16 @@ export class TaskUsecase {
     );
     return tasks;
   }
+
+  async listAll(): Promise<any> {
+    const { data: tasks } = await this.taskRepository.list(
+      {
+        isDeleted: false,
+      },
+      {
+        createdAt: "desc",
+      },
+    );
+    return tasks;
+  }
 }

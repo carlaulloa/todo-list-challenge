@@ -1,14 +1,10 @@
 ## Development
 
-Create .env.yaml in project root.
+Create .env in project root.
 
 ```yml
-develop:
-  PORT: YOUR_PORT
-  DATABASE:
-    NAME: DB_NAME
-    URL: YOUR_MONGO_URL
-  TOKEN:
-    TIMEOUT: TIMEOUT_IN_MS
-    SECRET: YOUR_SECRET
+PORT=YOUR_PORT
+
+DATABASE_NAME=DB_NAME
+DATABASE_URL=DB_URL
 ```

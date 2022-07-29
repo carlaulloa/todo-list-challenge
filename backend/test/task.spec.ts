@@ -42,7 +42,22 @@ describe('Task', () => {
     expect(body).toHaveProperty('state.name');
   })
 
-  test('Fail. Get paginated', async() => {
+  test('Fail, Insert when range date is invalid', async() => {
+    const response = await request(app)
+      .post('/v1/tasks')
+      .send({
+        description: 'Tarea 1',
+        state: {
+          id: taskStates[0]._id
+        },
+        startDate: new Date(2022, 7, 31),
+        endDate: new Date(2022, 7, 30) 
+      });
+      
+    expect(response.statusCode).toBe(400);
+  })
+
+  test('Fail. Get paginated without pagination params', async() => {
     const response = await request(app)
       .get('/v1/tasks/paging');
     expect(response.statusCode).toBe(400);

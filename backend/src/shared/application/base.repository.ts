@@ -3,7 +3,7 @@ import { FilterQuery, SaveOptions, QueryOptions } from "mongoose";
 import { ResultPaging } from "../entities/result-paging.entity";
 
 export interface RepositoryBase<T> {
-  list(filters: FilterQuery<T>): Promise<Result<T[]>>;
+  list(filters: FilterQuery<T>, order: any): Promise<Result<T[]>>;
   listOne(filters: FilterQuery<T>): Promise<Result<T>>;
   listByPage(
     filters: FilterQuery<T>,

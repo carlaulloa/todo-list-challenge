@@ -4,17 +4,13 @@ import { Validators } from "../../shared/adapter/validator";
 export const schema = {
   INSERT: {
     body: Joi.object({
-      description: Joi.string().required(),
-      startDate: Joi.date().iso(),
-      endDate: Joi.date().iso(),
+      description: Joi.string().min(3).max(100).required(),
+      startDate: Joi.date().iso().allow(null),
+      endDate: Joi.date().iso().allow(null).min(Joi.ref("startDate")),
       state: Joi.object({
         id: Joi.string().required()
       }),
-    }).when(Joi.object({ startDate: Joi.exist(), endDate: Joi.exist() }), {
-      then: Joi.object({
-        endDate: Joi.date().iso().min(Joi.ref("startDate")),
-      }),
-    }),
+    })
   },
   UPDATE: {
     params: Joi.object({
@@ -25,13 +21,9 @@ export const schema = {
       state: Joi.object({
         id: Joi.string().required()
       }),
-      startDate: Joi.date().iso(),
-      endDate: Joi.date().iso(),
-    }).when(Joi.object({ startDate: Joi.exist(), endDate: Joi.exist() }), {
-      then: Joi.object({
-        endDate: Joi.date().iso().min(Joi.ref("startDate")),
-      }),
-    }),
+      startDate: Joi.date().iso().allow(null),
+      endDate: Joi.date().iso().allow(null).min(Joi.ref("startDate")),
+    })
   },
   REMOVE: {
     params: Joi.object({

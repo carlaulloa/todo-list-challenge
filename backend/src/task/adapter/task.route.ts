@@ -30,5 +30,9 @@ route.delete(
 route.get(
   '/paging',
   Validators.validate(schema.LIST_BY_PAGE),
-  ErrorHandler.handleAsyncError(controller.list.bind(controller))
+  ErrorHandler.handleAsyncError(controller.listByPage.bind(controller))
+);
+route.get(
+  '/',
+  ErrorHandler.handleAsyncError(controller.listAll.bind(controller))
 );

@@ -13,6 +13,7 @@ export class SeedBootstrap implements ISeedBootstrap {
   async initializeAll(): Promise<void> {
     await this.initializeTaskStates();
     await this.initializeTasks();
+    console.log('All seeds loaded')
   }
 
   async initializeTaskStates(): Promise<any> {

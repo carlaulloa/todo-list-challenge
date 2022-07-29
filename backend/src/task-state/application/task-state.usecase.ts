@@ -63,9 +63,12 @@ export class TaskStateUsecase {
   }
 
   async list(): Promise<any> {
-    const { data: taskStates } = await this.taskStateRepository.list({
-      isDeleted: false,
-    });
+    const { data: taskStates } = await this.taskStateRepository.list(
+      {
+        isDeleted: false,
+      },
+      {}
+    );
     return taskStates;
   }
 }
